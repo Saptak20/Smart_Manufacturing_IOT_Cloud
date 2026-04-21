@@ -15,7 +15,10 @@ humidity = st.number_input("Humidity")
 pressure = st.number_input("Pressure")
 energy = st.number_input("Energy Consumption")
 
-machine_status = st.selectbox("Machine Status", ["Running", "Stopped", "Maintenance"])
+machine_status = st.selectbox(
+    "Machine Status",
+    ["Running", "Stopped", "Maintenance"]
+)
 
 # Create input dataframe
 input_data = pd.DataFrame({
@@ -30,10 +33,17 @@ input_data = pd.DataFrame({
 # Convert categorical → numeric
 input_data = pd.get_dummies(input_data)
 
-# 🔧 THIS IS THE IMPORTANT PART (alignment fix)
+# Align columns with training data
 input_data = input_data.reindex(columns=model_columns, fill_value=0)
 
 # Predict
 if st.button("Predict"):
-    prediction = model.predict(input_data)
-    st.success(f"Prediction: {prediction[0]}")
+
+    # 🔥 NEW: use probability instead of direct prediction
+    prob = model.predict_proba(input_data)[0][1]
+
+    # 🔥 Threshold tuning (fix bias)
+    if prob > 0.3:
+        st.error(f"⚠️ Maintenance Needed (Confidence: {prob:.2f})")
+    else:
+        st.success(f"✅ Machine Healthy (Confidence: {1-prob:.2f})")
