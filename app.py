@@ -18,7 +18,6 @@ machine_status = st.selectbox(
     ["Running", "Stopped", "Maintenance"]
 )
 
-# Create input dataframe
 input_data = pd.DataFrame({
     "temperature": [temperature],
     "vibration": [vibration],
