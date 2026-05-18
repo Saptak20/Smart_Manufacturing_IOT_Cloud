@@ -27,7 +27,6 @@ input_data = pd.DataFrame({
     "machine_status": [machine_status]
 })
 
-# Convert categorical → numeric
 input_data = pd.get_dummies(input_data)
 
 # Align columns with training data
