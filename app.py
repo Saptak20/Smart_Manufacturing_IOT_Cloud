@@ -29,7 +29,6 @@ input_data = pd.DataFrame({
 
 input_data = pd.get_dummies(input_data)
 
-# Align columns with training data
 input_data = input_data.reindex(columns=model_columns, fill_value=0)
 
 # Predict
