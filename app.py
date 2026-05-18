@@ -7,7 +7,6 @@ model_columns = joblib.load("model_columns.pkl")
 
 st.title("Smart Manufacturing Predictor")
 
-# Inputs
 temperature = st.number_input("Temperature")
 vibration = st.number_input("Vibration")
 humidity = st.number_input("Humidity")
