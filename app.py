@@ -2,7 +2,6 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-# Load model + columns
 model = joblib.load("model.pkl")
 model_columns = joblib.load("model_columns.pkl")
 
